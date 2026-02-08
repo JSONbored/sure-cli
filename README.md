@@ -117,6 +117,10 @@ sure-cli status
 sure-cli holdings list
 sure-cli holdings performance --period 1m
 
+# Trades (requires Sure investment API)
+sure-cli trades list
+sure-cli trades show <trade_id>
+
 # Sync
 sure-cli sync
 ```
@@ -193,7 +197,5 @@ sure-cli config fee-keywords    # show active fee keywords (60+ defaults)
 ## Known Upstream Limitations
 
 - **`GET /api/v1/accounts/:id`** returns 404 upstream. `accounts show` falls back to list lookup.
-- **Holdings API** not yet available. `holdings` commands are scaffolded but blocked.
 
 See `docs/ROADMAP.md` for planned features.
-
