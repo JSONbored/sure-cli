@@ -3,7 +3,6 @@ package root
 import (
 	"fmt"
 	"net/url"
-	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/we-promise/sure-cli/internal/api"
@@ -47,17 +46,17 @@ func newTradesCmd() *cobra.Command {
 				q.Set("limit", fmt.Sprintf("%d", limit))
 			}
 
-			path := "/api/v1/trades"
-			if enc := strings.TrimPrefix(q.Encode(), ""); enc != "" {
-				path = path + "?" + enc
-			}
+			u := url.URL{Path: "/api/v1/trades", RawQuery: q.Encode()}
+			path := u.String()
 
 			var res any
 			r, err := client.Get(path, &res)
 			if err != nil {
 				output.Fail("request_failed", err.Error(), nil)
 			}
-			_ = output.Print(format, output.Envelope{Data: res, Meta: &output.Meta{Status: r.StatusCode()}})
+			if err := output.Print(format, output.Envelope{Data: res, Meta: &output.Meta{Status: r.StatusCode()}}); err != nil {
+				output.Fail("output_failed", err.Error(), nil)
+			}
 		},
 	}
 
@@ -82,7 +81,9 @@ func newTradesCmd() *cobra.Command {
 			if err != nil {
 				output.Fail("request_failed", err.Error(), nil)
 			}
-			_ = output.Print(format, output.Envelope{Data: res, Meta: &output.Meta{Status: r.StatusCode()}})
+			if err := output.Print(format, output.Envelope{Data: res, Meta: &output.Meta{Status: r.StatusCode()}}); err != nil {
+				output.Fail("output_failed", err.Error(), nil)
+			}
 		},
 	})
 
