@@ -87,10 +87,14 @@ func Save() error {
 		viper.SetConfigFile(cfgFile)
 	}
 
-	if err := os.MkdirAll(filepath.Dir(cfgFile), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(cfgFile), 0o700); err != nil {
 		return err
 	}
-	return viper.WriteConfigAs(cfgFile)
+	if err := viper.WriteConfigAs(cfgFile); err != nil {
+		return err
+	}
+	// Config contains sensitive credentials (tokens, API keys) — restrict to owner-only.
+	return os.Chmod(cfgFile, 0o600)
 }
 
 func APIURL() string { return viper.GetString("api_url") }
