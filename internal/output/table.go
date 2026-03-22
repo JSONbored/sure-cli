@@ -59,5 +59,54 @@ func PrintTable(env Envelope) bool {
 		return true
 	}
 
+	// Holdings list
+	if holdings, ok := m["holdings"].([]any); ok {
+		tw := table.NewWriter()
+		tw.SetOutputMirror(os.Stdout)
+		tw.AppendHeader(table.Row{"id", "name", "symbol", "quantity", "value", "account"})
+		for _, h := range holdings {
+			rowm, _ := h.(map[string]any)
+			acct := ""
+			if am, ok := rowm["account"].(map[string]any); ok {
+				acct = fmt.Sprint(am["name"])
+			}
+			tw.AppendRow(table.Row{
+				fmt.Sprint(rowm["id"]),
+				fmt.Sprint(rowm["name"]),
+				fmt.Sprint(rowm["symbol"]),
+				fmt.Sprint(rowm["quantity"]),
+				fmt.Sprint(rowm["value"]),
+				acct,
+			})
+		}
+		tw.Render()
+		return true
+	}
+
+	// Trades list
+	if trades, ok := m["trades"].([]any); ok {
+		tw := table.NewWriter()
+		tw.SetOutputMirror(os.Stdout)
+		tw.AppendHeader(table.Row{"id", "date", "symbol", "side", "quantity", "price", "account"})
+		for _, tr := range trades {
+			rowm, _ := tr.(map[string]any)
+			acct := ""
+			if am, ok := rowm["account"].(map[string]any); ok {
+				acct = fmt.Sprint(am["name"])
+			}
+			tw.AppendRow(table.Row{
+				fmt.Sprint(rowm["id"]),
+				fmt.Sprint(rowm["date"]),
+				fmt.Sprint(rowm["symbol"]),
+				fmt.Sprint(rowm["side"]),
+				fmt.Sprint(rowm["quantity"]),
+				fmt.Sprint(rowm["price"]),
+				acct,
+			})
+		}
+		tw.Render()
+		return true
+	}
+
 	return false
 }

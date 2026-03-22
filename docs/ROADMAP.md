@@ -38,12 +38,6 @@ Future features and ideas for `sure-cli`.
 - Market data plugin (quotes, ETF classification)
 - Monte Carlo plugin (retirement simulations)
 
-## Blocked
-
-### Holdings / Performance
-- `holdings list` and `holdings performance` are scaffolded
-- Blocked on upstream Sure investment API endpoints
-
 ## Completed
 
 See [CHANGELOG](../CHANGELOG.md) or GitHub releases for shipped features.
