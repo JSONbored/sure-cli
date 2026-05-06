@@ -93,6 +93,14 @@ sure-cli transactions create --amount "-12.34" --date 2026-02-04 --name "Coffee"
 sure-cli transactions update <tx_id> --name "Coffee (fixed)" --dry-run
 sure-cli transactions delete <tx_id> --apply
 
+# Reference data and rules
+sure-cli categories list --roots-only
+sure-cli merchants list
+sure-cli tags create --name Travel --color '#3b82f6'
+sure-cli tags create --name Travel --color '#3b82f6' --apply
+sure-cli rules list --active true
+sure-cli rule-runs list --status success
+
 # Phase 4 (read-only heuristics)
 sure-cli insights subscriptions --days 120
 sure-cli insights fees --days 120
