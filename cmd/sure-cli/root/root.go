@@ -55,7 +55,10 @@ func New() *cobra.Command {
 	cmd.AddCommand(newExportCmd())
 	cmd.AddCommand(newStatusCmd())
 	cmd.AddCommand(newHoldingsCmd())
+	cmd.AddCommand(newSecuritiesCmd())
+	cmd.AddCommand(newSecurityPricesCmd())
 	cmd.AddCommand(newTradesCmd())
+	cmd.AddCommand(newRecurringTransactionsCmd())
 	cmd.AddCommand(&cobra.Command{
 		Use:   "version",
 		Short: "Print version information",
