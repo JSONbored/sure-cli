@@ -69,6 +69,7 @@ func New() *cobra.Command {
 	cmd.AddCommand(newSecurityPricesCmd())
 	cmd.AddCommand(newTradesCmd())
 	cmd.AddCommand(newRecurringTransactionsCmd())
+	cmd.AddCommand(newUsersCmd())
 	cmd.AddCommand(&cobra.Command{
 		Use:   "version",
 		Short: "Print version information",

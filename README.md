@@ -158,6 +158,13 @@ sure-cli recurring-transactions list --status active
 sure-cli recurring-transactions create --name Rent --last-occurrence-date 2026-04-01 --next-expected-date 2026-05-01
 sure-cli recurring-transactions create --name Rent --last-occurrence-date 2026-04-01 --next-expected-date 2026-05-01 --apply
 
+# Account reset and deletion
+sure-cli users reset
+sure-cli users reset --apply
+sure-cli users reset status
+sure-cli users delete-me
+sure-cli users delete-me --apply
+
 # Sync
 sure-cli sync
 ```
